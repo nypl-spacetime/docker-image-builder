@@ -9,7 +9,14 @@ is used to:
     That Elasticsearch powers our public facing sites.
 
 You won't find any ETL logic in this repository.
-It exists only to build a machine capable of running those jobs.
+This repo exists only to build a machine capable of running those jobs.
 
 If you want to learn about the process itself [Bert](https://github.com/bertspaan)
 has done a wonderful job with [this README](https://github.com/nypl-spacetime/spacetime-etl) which can serve as a getting started guide.
+
+
+## Building the Docker Image
+
+_TODO: this will change as we pass build args for secrets, etc_
+
+`docker build --no-cache .`
