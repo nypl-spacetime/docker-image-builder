@@ -20,4 +20,8 @@ For more information about the NYC Space/Time Directory project, see [spacetime.
 
 _TODO: this will change as we pass build args for secrets, etc_
 
-`docker build --no-cache .`
+    docker build --no-cache .
+
+To run the image, with bash:
+
+    docker run --rm -ti IMAGE /bin/bash
