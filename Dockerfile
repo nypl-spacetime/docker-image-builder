@@ -23,22 +23,6 @@ COPY etl-modules.json /root/spacetime/
 COPY install-etl-modules.sh /root/spacetime/
 RUN /root/spacetime/install-etl-modules.sh
 
-# # WORKDIR /home/app/spacetime/etl-modules
-# # run git clone https://github.com/nypl-spacetime/etl-oldnyc.git
-# # run git clone https://github.com/nypl-spacetime/etl-mapwarper.git
-# # run git clone https://github.com/nypl-spacetime/etl-nyc-streets.git
-# # run git clone https://github.com/nypl-spacetime/etl-nyc-wards.git
-# # run git clone https://github.com/nypl-spacetime/etl-cemeteries.git
-# # run git clone https://github.com/nypl-spacetime/etl-building-inspector.git
-# # run git clone https://github.com/nypl-spacetime/etl-perris-atlas-footprints.git
-# # run git clone https://github.com/nypl-spacetime/etl-digital-collections.git
-# # run git clone https://github.com/nypl-spacetime/etl-nyc-churches.git
-# # run git clone https://github.com/nypl-spacetime/etl-enumeration-districts.git
-# # run git clone https://github.com/nypl-spacetime/etl-group-maps.git
-# # run git clone https://github.com/nypl-spacetime/etl-spacetime-graph.git
-# # run git clone https://github.com/nypl-spacetime/etl-building-inspector-toponyms.git
-# # run git clone https://github.com/nypl-spacetime/etl-elasticsearch-ingest.git
-
 # Clean up apk cache when done.
 RUN rm -rf /var/cache/apk/*
 
