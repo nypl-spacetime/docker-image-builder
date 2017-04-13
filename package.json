@@ -1,0 +1,7 @@
+{
+  "name": "spacetime",
+  "dependencies": {},
+  "scripts": {
+    "start" : "node -v"
+  }
+}
