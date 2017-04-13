@@ -5,6 +5,16 @@ RUN apk update
 # Install bash, bash and jq
 RUN apk add bash && apk add git && apk add jq
 
+# make, gcc and python are needed for node-gyp to work
+RUN apk add make gcc g++ python
+
+# Install GDAL
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+RUN apk update
+RUN apk add gdal
+
+# TODO: DC credentials for etl-oldnyc
+
 # Create Directories
 RUN mkdir /root/spacetime
 RUN mkdir /root/spacetime/etl-modules

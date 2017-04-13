@@ -3,14 +3,10 @@
   "mapwarper",
   "nyc-streets",
   "nyc-wards",
-  "cemeteries",
   "building-inspector",
   "perris-atlas-footprints",
   "digital-collections",
   "nyc-churches",
   "enumeration-districts",
-  "group-maps",
-  "spacetime-graph",
-  "building-inspector-toponyms",
-  "elasticsearch-ingest"
+  "group-maps"
 ]
