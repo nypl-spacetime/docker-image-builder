@@ -1,0 +1,10 @@
+#!/bin/bash
+
+: "${DIGITAL_COLLECTIONS_TOKEN:?Please set DIGITAL_COLLECTIONS_TOKEN environment variable}"
+: "${SPACETIME_AWS_ACCESS_KEY_ID:?Please set SPACETIME_AWS_ACCESS_KEY_ID environment variable}"
+: "${SPACETIME_AWS_SECRET_ACCESS_KEY:?Please set SPACETIME_AWS_SECRET_ACCESS_KEY environment variable}"
+
+docker build "$@" -t spacetime/etl \
+  --build-arg DIGITAL_COLLECTIONS_TOKEN=$DIGITAL_COLLECTIONS_TOKEN \
+  --build-arg AWS_ACCESS_KEY_ID=$SPACETIME_AWS_ACCESS_KEY_ID \
+  --build-arg AWS_SECRET_ACCESS_KEY=$SPACETIME_AWS_SECRET_ACCESS_KEY .
