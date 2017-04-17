@@ -12,8 +12,8 @@ ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 RUN apk update
 
-# Install bash, bash, zip and jq
-RUN apk add bash && apk add git && apk add zip && apk add jq
+# Install bash, bash, zip, nano and jq
+RUN apk add bash && apk add git && apk add zip && apk add nano && apk add jq
 
 # make, gcc and python are needed for node-gyp to work
 RUN apk add make gcc g++ python
