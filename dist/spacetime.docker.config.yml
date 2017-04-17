@@ -1,0 +1,7 @@
+etl:
+  moduleDir: /root/spacetime/etl-modules
+  outputDir: /root/data/spacetime/etl
+
+elasticsearch:
+  host: localhost
+  port: 9200

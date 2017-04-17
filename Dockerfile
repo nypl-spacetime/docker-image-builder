@@ -1,37 +1,65 @@
-# See https://github.com/phusion/passenger-docker/blob/master/Changelog.md for
-# a list of version numbers.
+FROM mhart/alpine-node
 
-FROM phusion/passenger-nodejs:0.9.20
+# Set AWS and Digital Collections credentials
+ARG DIGITAL_COLLECTIONS_TOKEN
+ENV DIGITAL_COLLECTIONS_TOKEN=${DIGITAL_COLLECTIONS_TOKEN}
 
-# Set correct environment variables.
-ENV HOME /root
+ARG AWS_ACCESS_KEY_ID
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
 
-# Use baseimage-docker's init process.
-CMD ["/sbin/my_init"]
+ARG AWS_SECRET_ACCESS_KEY
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+RUN apk update
+
+# Install bash, bash, zip and jq
+RUN apk add bash && apk add git && apk add zip && apk add jq
+
+# make, gcc and python are needed for node-gyp to work
+RUN apk add make gcc g++ python
+
+# Install aws-cli
+RUN apk add py-pip
+RUN pip install awscli
+
+# Install GDAL
+RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+RUN apk update
+RUN apk add gdal
 
 # Create Directories
-run mkdir /home/app/spacetime-app
-run mkdir /home/app/spacetime-app/etl-modules
+RUN mkdir /root/spacetime
+RUN mkdir /root/spacetime/etl-modules
+RUN mkdir -p /root/data/spacetime/etl
+
+# Install spacetime-etl, spacetime-cli, spacetime-config and spacetime-orchestrator
+WORKDIR /root/spacetime/
+RUN npm install -g nypl-spacetime/spacetime-etl
+RUN npm install -g nypl-spacetime/spacetime-cli
+RUN npm install -g nypl-spacetime/spacetime-config
+RUN npm install -g nypl-spacetime/orchestrator
+
+# Get Space/Time scripts
+RUN git clone https://github.com/nypl-spacetime/scripts.git
+
+# Create configuration file
+COPY dist/spacetime.docker.config.yml /root/spacetime/
+ENV SPACETIME_CONFIG=/root/spacetime/spacetime.docker.config.yml
 
 # Install ETL Modules
-WORKDIR /home/app/spacetime-app/etl-modules
-run git clone https://github.com/nypl-spacetime/etl-oldnyc.git
-run git clone https://github.com/nypl-spacetime/etl-mapwarper.git
-run git clone https://github.com/nypl-spacetime/etl-nyc-streets.git
-run git clone https://github.com/nypl-spacetime/etl-nyc-wards.git
-run git clone https://github.com/nypl-spacetime/etl-cemeteries.git
-run git clone https://github.com/nypl-spacetime/etl-building-inspector.git
-run git clone https://github.com/nypl-spacetime/etl-perris-atlas-footprints.git
-run git clone https://github.com/nypl-spacetime/etl-digital-collections.git
-run git clone https://github.com/nypl-spacetime/etl-nyc-churches.git
-run git clone https://github.com/nypl-spacetime/etl-enumeration-districts.git
-run git clone https://github.com/nypl-spacetime/etl-group-maps.git
-run git clone https://github.com/nypl-spacetime/etl-spacetime-graph.git
-run git clone https://github.com/nypl-spacetime/etl-building-inspector-toponyms.git
-run git clone https://github.com/nypl-spacetime/etl-elasticsearch-ingest.git
+COPY dist/datasets.json /root/spacetime/
+COPY dist/install-etl-modules.sh /root/spacetime/
+RUN /root/spacetime/install-etl-modules.sh
 
-# The 'app' user is who owns this
-RUN chown -R app:app /home/app/spacetime-app
+# Create AWS credentials file
+RUN mkdir /root/.aws
+COPY dist/aws-credentials.sh /root/spacetime/
+RUN /root/spacetime/aws-credentials.sh > /root/.aws/credentials
 
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Copy orchestrate and sync script
+COPY dist/orchestrate-and-sync.sh /root/spacetime
+
+# Clean up apk cache when done.
+RUN rm -rf /var/cache/apk/*
+
+WORKDIR /root/spacetime/
