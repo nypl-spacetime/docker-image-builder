@@ -4,11 +4,13 @@
   ["nyc-streets", "transform"],
   ["nyc-wards", "transform"],
   ["building-inspector", "transform"],
+  ["building-inspector-toponyms", "transform"],
+  ["building-inspector-nyc-streets", "transform"],
   ["perris-atlas-footprints", "transform"],
   ["nyc-churches", "transform"],
   ["enumeration-districts", "transform"],
-  ["building-inspector-toponyms", "transform"],
   ["digital-collections", "aggregate"],
   ["spacetime-graph", "aggregate"],
-  ["group-maps", "aggregate"]
+  ["group-maps", "aggregate"],
+  ["data-summary", "summary"]
 ]

@@ -29,6 +29,7 @@ RUN apk add gdal
 
 # Create Directories
 RUN mkdir /root/spacetime
+RUN mkdir /root/spacetime/logs
 RUN mkdir /root/spacetime/etl-modules
 RUN mkdir -p /root/data/spacetime/etl
 

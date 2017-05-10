@@ -1,5 +1,8 @@
 #!/bin/bash
 
+exec > /root/spacetime/logs/etl.log
+exec 2>&1
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 spacetime-orchestrate run
