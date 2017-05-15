@@ -38,3 +38,14 @@ To run the latest image:
 To run the image and execute all ETL steps, run:
 
     ./run-etl
+
+## Pushing image to Amazon
+
+First, build the image, then get authorization key:
+
+    aws ecr get-login --region us-east-1 --profile spacetime
+
+Run the output of that command in bash to log in, and then push the image to ECR:
+
+    docker tag spacetime/etl:latest 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
+    docker push 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
