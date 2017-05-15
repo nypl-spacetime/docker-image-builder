@@ -29,7 +29,6 @@ RUN apk add gdal
 
 # Create Directories
 RUN mkdir /root/spacetime
-RUN mkdir /root/spacetime/logs
 RUN mkdir /root/spacetime/etl-modules
 RUN mkdir -p /root/data/spacetime/etl
 
@@ -64,3 +63,5 @@ COPY dist/orchestrate-and-sync.sh /root/spacetime
 RUN rm -rf /var/cache/apk/*
 
 WORKDIR /root/spacetime/
+
+ENTRYPOINT ["./orchestrate-and-sync.sh"]

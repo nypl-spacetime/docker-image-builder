@@ -10,6 +10,8 @@
   ["nyc-churches", "transform"],
   ["enumeration-districts", "transform"],
   ["digital-collections", "aggregate"],
+  ["city-directories", "transform"],
+  ["city-directories-building-inspector", "transform"],
   ["spacetime-graph", "aggregate"],
   ["group-maps", "aggregate"],
   ["data-summary", "summary"]

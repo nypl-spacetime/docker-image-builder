@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm -ti spacetime/etl /bin/bash
+docker run -it --entrypoint /bin/bash spacetime/etl
