@@ -46,6 +46,11 @@ RUN git clone https://github.com/nypl-spacetime/scripts.git
 COPY dist/spacetime.docker.config.yml /root/spacetime/
 ENV SPACETIME_CONFIG=/root/spacetime/spacetime.docker.config.yml
 
+# Populate /etc/mime.types
+#   Used by AWS CLI when syncing files to S3
+#   https://docs.python.org/2/library/mimetypes.html
+COPY dist/mime.types /etc/
+
 # Install ETL Modules
 COPY dist/datasets.json /root/spacetime/
 COPY dist/install-etl-modules.sh /root/spacetime/
