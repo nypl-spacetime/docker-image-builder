@@ -1,5 +1,6 @@
 [
   ["oldnyc", "transform"],
+  ["surveyor", "transform"],
   ["mapwarper", "transform"],
   ["nyc-streets", "transform"],
   ["nyc-wards", "transform"],
@@ -9,10 +10,11 @@
   ["perris-atlas-footprints", "transform"],
   ["nyc-churches", "transform"],
   ["enumeration-districts", "transform"],
-  ["digital-collections", "aggregate"],
   ["city-directories", "transform"],
   ["city-directories-building-inspector", "transform"],
+  ["dc-toponyms", "transform"],
   ["spacetime-graph", "aggregate"],
   ["group-maps", "aggregate"],
+  ["data-dependencies", "aggregate"],
   ["data-summary", "summary"]
 ]
