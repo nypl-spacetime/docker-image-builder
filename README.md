@@ -43,7 +43,7 @@ To run the image and execute all ETL steps, run:
 
 First, build the image, then get authorization key:
 
-    aws ecr get-login --region us-east-1 --profile spacetime
+    aws ecr get-login --region us-east-1 --profile spacetime --no-include-email
 
 Run the output of that command in bash to log in, and then push the image to ECR:
 
