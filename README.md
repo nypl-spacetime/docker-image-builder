@@ -45,7 +45,11 @@ First, build the image, then get authorization key:
 
     aws ecr get-login --region us-east-1 --profile spacetime --no-include-email
 
-Run the output of that command in bash to log in, and then push the image to ECR:
+On MacOS, you can also copy the output from the command above directly to your clipboard:
+
+    aws ecr get-login --region us-east-1 --profile spacetime --no-include-email | pbcopy
+
+Copy/paste/run the output of that command in bash to log in, and then push the image to ECR:
 
     docker tag spacetime/etl:latest 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
     docker push 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
