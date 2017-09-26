@@ -10,4 +10,4 @@ for modulestep in $(cat $DIR/datasets.json | jq -r '.[] | .[0] + "." + .[1]'); d
   /root/spacetime/scripts/dataset-to-s3.sh $modulestep
 done
 
-/root/spacetime/scripts/all-etl-to-s3.sh
+/root/spacetime/scripts/all-etl-data-to-s3.sh
