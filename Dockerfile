@@ -1,4 +1,4 @@
-FROM mhart/alpine-node
+FROM mhart/alpine-node:8
 
 # Set AWS and Digital Collections credentials
 ARG DIGITAL_COLLECTIONS_TOKEN
@@ -20,6 +20,7 @@ RUN apk add make gcc g++ python
 
 # Install aws-cli
 RUN apk add py-pip
+RUN pip install --upgrade pip
 RUN pip install awscli
 
 # Install GDAL
@@ -27,20 +28,27 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositor
 RUN apk update
 RUN apk add gdal
 
-# Create Directories
+# Create directories
 RUN mkdir /root/spacetime
 RUN mkdir /root/spacetime/etl-modules
 RUN mkdir -p /root/data/spacetime/etl
 
-# Install spacetime-etl, spacetime-cli, spacetime-config and spacetime-orchestrator
+# Install CLI tools
 WORKDIR /root/spacetime/
 RUN npm install -g nypl-spacetime/spacetime-etl
 RUN npm install -g nypl-spacetime/spacetime-cli
 RUN npm install -g nypl-spacetime/spacetime-config
 RUN npm install -g nypl-spacetime/orchestrator
+RUN npm install -g nypl-spacetime/data-package
 
-# Get Space/Time scripts
-RUN git clone https://github.com/nypl-spacetime/scripts.git
+# Install city-directory-entry-parser
+#   this tool needs Python 3, and several math + ML modules
+RUN git clone https://github.com/nypl-spacetime/city-directory-entry-parser.git
+RUN apk add python3 python3-dev openblas-dev py3-pip
+RUN pip3 install numpy scipy sklearn nltk sklearn_crfsuite
+
+# Get dataset scripts
+RUN git clone https://github.com/nypl-spacetime/dataset-scripts.git
 
 # Create configuration file
 COPY dist/spacetime.docker.config.yml /root/spacetime/

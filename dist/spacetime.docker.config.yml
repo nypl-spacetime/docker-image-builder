@@ -2,6 +2,19 @@ etl:
   moduleDir: /root/spacetime/etl-modules
   outputDir: /root/data/spacetime/etl
 
+  modules:
+    map-warper:
+      includeMapLayers: false
+
+    city-directories:
+      tableUrl: http://spacetime.nypl.org/city-directories/DIRECTORIES
+      dataUrl: https://spacetime-nypl-org.s3.amazonaws.com/city-directories/hocr/
+      minYear: 1849
+      maxYear: 1883
+      parser:
+        path: /root/spacetime/city-directory-entry-parser
+        training: /root/spacetime/city-directory-entry-parser/data/nyc-city-directories/nypl-labeled-70-training.csv
+
 elasticsearch:
   host: localhost
   port: 9200

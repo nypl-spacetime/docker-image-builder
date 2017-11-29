@@ -3,9 +3,9 @@
 This repository is used to build a Docker image that
 is used to:
 
-- Run all [NYC Space/Time Directory ETL modules](https://github.com/nypl-spacetime/spacetime-etl)
-- Publish the results of those ETL modules to S3
-- Index the results of the [`spacetime-graph` module](https://github.com/nypl-spacetime/etl-spacetime-graph) into Elasticsearch to power the [NYC Space/Time Directory API](https://github.com/nypl-spacetime/spacetime-api) and [Atlas](https://github.com/nypl-spacetime/atlas)
+- Run all [NYC Space/Time Directory ETL modules](https://github.com/nypl-spacetime/spacetime-etl);
+- Publish the results of those ETL modules to S3;
+- Index the results of the [`spacetime-graph` module](https://github.com/nypl-spacetime/etl-spacetime-graph) into Elasticsearch to power the [NYC Space/Time Directory API](https://github.com/nypl-spacetime/spacetime-api) and [Atlas](https://github.com/nypl-spacetime/atlas).
 
 For more information about the NYC Space/Time Directory project, see [spacetime.nypl.org](http://spacetime.nypl.org).
 
@@ -20,6 +20,8 @@ Environment variables:
 ## Datasets
 
 See [`dist/datasets.json`](dist/datasets.json).
+
+Every dataset corresponds to a NYC Space/Time Directory ETL module, e.g. `nyc-streets` corresponds to [`etl-nyc-streets`](https://github.com/nypl-spacetime/etl-nyc-streets).
 
 ## Building the Docker Image
 
@@ -53,3 +55,7 @@ Copy/paste/run the output of that command in bash to log in, and then push the i
 
     docker tag spacetime/etl:latest 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
     docker push 843376026590.dkr.ecr.us-east-1.amazonaws.com/spacetime/etl:latest
+
+## See also
+
+- [Architecture diagram of NYC Space/Time Directory](http://spacetime.nypl.org)
