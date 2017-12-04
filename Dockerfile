@@ -62,6 +62,7 @@ COPY dist/mime.types /etc/
 # Install ETL Modules
 COPY dist/datasets.json /root/spacetime/
 COPY dist/install-etl-modules.sh /root/spacetime/
+COPY dist/update-etl-modules.sh /root/spacetime/
 RUN /root/spacetime/install-etl-modules.sh
 
 # Create AWS credentials file
