@@ -11,8 +11,8 @@
   ["emigrant-city", "transform"],
   ["building-inspector", "transform"],
   ["addresses", "transform"],
-  ["spacetime-graph", "aggregate"],
   ["group-maps", "aggregate"],
   ["data-dependencies", "aggregate"],
-  ["data-summary", "summary"]
+  ["data-summary", "summary"],
+  ["elasticsearch-ingest", "ingest"]
 ]
